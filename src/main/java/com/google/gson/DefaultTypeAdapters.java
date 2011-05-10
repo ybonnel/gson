@@ -656,13 +656,18 @@ final class DefaultTypeAdapters {
       // This handles cases where users are using their own subclass of Collection.
       Collection collection = constructCollectionType(typeOfT, context);
       Type childType = $Gson$Types.getCollectionElementType(typeOfT, $Gson$Types.getRawType(typeOfT));
-      for (JsonElement childElement : json.getAsJsonArray()) {
-        if (childElement == null || childElement.isJsonNull()) {
-          collection.add(null);
-        } else {
-          Object value = context.deserialize(childElement, childType);
-          collection.add(value);
+      if (json.isJsonArray()) {
+        for (JsonElement childElement : json.getAsJsonArray()) {
+          if (childElement == null || childElement.isJsonNull()) {
+            collection.add(null);
+          } else {
+            Object value = context.deserialize(childElement, childType);
+            collection.add(value);
+          }
         }
+      } else {
+        Object value = context.deserialize(json, childType);
+        collection.add(value);  
       }
       return collection;
     }
