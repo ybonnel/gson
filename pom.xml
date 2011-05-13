@@ -290,4 +290,14 @@
       <organization>Google Inc.</organization>
     </developer>
   </developers>
+  <distributionManagement>
+	<repository>
+		<id>repo</id>
+		<url>https://github.com/ybonnel/ybonnel-mvn-repo/raw/master/releases</url>
+	</repository>
+	<snapshotRepository>
+		<id>snapshot-repo</id>
+		<url>https://github.com/ybonnel/ybonnel-mvn-repo/raw/master/snapshots</url>
+	</snapshotRepository>
+</distributionManagement>
 </project>
